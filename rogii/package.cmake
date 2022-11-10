@@ -36,7 +36,6 @@ if(MSVC)
             INTERFACE_INCLUDE_DIRECTORIES
                 "${CMAKE_CURRENT_LIST_DIR}/;${CMAKE_CURRENT_LIST_DIR}/include/"
     )
-    endif()
 endif()
 
 set(
