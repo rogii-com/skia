@@ -60,11 +60,6 @@ set(
 )
 
 set(
-    ARCH
-    "anycpu"
-)
-
-set(
     PACKAGE_NAME
     "skia-${ROGII_PKG_VERSION}-${ARCH}-${BUILD}${TAG}"
 )
