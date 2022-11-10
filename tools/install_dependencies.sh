@@ -46,7 +46,7 @@ if command -v lsb_release > /dev/null ; then
                PACKAGES="${PACKAGES} ninja-build"
            fi
            if ! dpkg_all_installed $PACKAGES; then
-               sudo apt-get $1 install $PACKAGES
+               apt-get update && apt-get $1 install $PACKAGES
            fi
            exit
            ;;
