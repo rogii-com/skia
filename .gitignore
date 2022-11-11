@@ -37,6 +37,7 @@ platform_tools/android/apps/*/.externalNativeBuild
 tools/skp/page_sets/data/*.json
 tools/skp/page_sets/data/*.wpr
 
+depot_tools
 common
 buildtools
 third_party/externals
