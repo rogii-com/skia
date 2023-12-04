@@ -8,7 +8,7 @@ add_library(
     IMPORTED
 )
 
-add_definitions(-DSK_GANESH -DGR_TEST_UTILS)
+add_definitions(-DSK_GL)
 
 if(MSVC)
     set_target_properties(
