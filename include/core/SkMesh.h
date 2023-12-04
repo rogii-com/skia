@@ -61,7 +61,7 @@ namespace SkSL { struct Program; }
  * assumed to be shared between stages. It is an error to specify uniforms in the vertex and
  * fragment program with the same name but different types, dimensionality, or layouts.
  */
-class SkMeshSpecification : public SkNVRefCnt<SkMeshSpecification> {
+class SK_API SkMeshSpecification : public SkNVRefCnt<SkMeshSpecification> {
 public:
     /** These values are enforced when creating a specification. */
     static constexpr size_t kMaxStride       = 1024;
@@ -257,9 +257,9 @@ private:
  * SkMeshSpecification::uniformSize() and SkMeshSpecification::uniforms() for sizing and packing
  * uniforms into the SkData.
  */
-class SkMesh {
+class SK_API SkMesh {
 public:
-    class IndexBuffer : public SkRefCnt {
+    class SK_API IndexBuffer : public SkRefCnt {
     public:
         virtual size_t size() const = 0;
 
@@ -276,7 +276,7 @@ public:
         virtual bool onUpdate(GrDirectContext*, const void* data, size_t offset, size_t size) = 0;
     };
 
-    class VertexBuffer : public SkRefCnt {
+    class SK_API VertexBuffer : public SkRefCnt {
     public:
         virtual size_t size() const = 0;
 
