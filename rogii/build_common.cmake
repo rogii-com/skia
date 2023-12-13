@@ -119,6 +119,15 @@ file(
         "${CMAKE_INSTALL_PREFIX}"
 )
 
+# Workaround: copy missing headers
+file(
+    COPY
+        "${CMAKE_SOURCE_DIR}/modules/skcms/skcms.h"
+    DESTINATION
+        "${CMAKE_INSTALL_PREFIX}/modules/skcms/"
+)
+
+
 file(
     COPY
         "${CMAKE_CURRENT_LIST_DIR}/package.cmake"
