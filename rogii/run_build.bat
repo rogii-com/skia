@@ -38,11 +38,16 @@ FOR  %%D IN (release debug) DO (
     ) > out\%%D\args.gn
 
     IF "%%D" == "debug" (
-        ECHO is_debug=true >> out\%%D\args.gn
+        (
+        ECHO is_debug=true
+        ECHO extra_cflags=["/MDd"]
+        ) >> out\%%D\args.gn
     ) ELSE (
-        ECHO is_debug=false >> out\%%D\args.gn
+        (
+        ECHO is_debug=false
+        ECHO extra_cflags=["/MD"]
+        ) >> out\%%D\args.gn
     )
-
 
     bin\gn gen out\%%D
     ninja -C out\%%D skia
