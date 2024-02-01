@@ -17,11 +17,11 @@ if(MSVC)
             IMPORTED_LOCATION
                 "${CMAKE_CURRENT_LIST_DIR}/bin/release/skia.dll"
             IMPORTED_LOCATION_DEBUG
-                "${CMAKE_CURRENT_LIST_DIR}/bin/debug/skia.dll"
+                "${CMAKE_CURRENT_LIST_DIR}/bin/debug/skiad.dll"
             IMPORTED_IMPLIB
                 "${CMAKE_CURRENT_LIST_DIR}/lib/release/skia.dll.lib"
             IMPORTED_IMPLIB_DEBUG
-                "${CMAKE_CURRENT_LIST_DIR}/lib/debug/skia.dll.lib"
+                "${CMAKE_CURRENT_LIST_DIR}/lib/debug/skiad.dll.lib"
             INTERFACE_INCLUDE_DIRECTORIES
                 "${CMAKE_CURRENT_LIST_DIR}/;${CMAKE_CURRENT_LIST_DIR}/include/"
     )
@@ -32,7 +32,7 @@ if(MSVC)
             IMPORTED_LOCATION
                 "${CMAKE_CURRENT_LIST_DIR}/lib/release/libskia.so"
             IMPORTED_LOCATION_DEBUG
-                "${CMAKE_CURRENT_LIST_DIR}/lib/debug/libskia.so"
+                "${CMAKE_CURRENT_LIST_DIR}/lib/debug/libskiad.so"
             INTERFACE_INCLUDE_DIRECTORIES
                 "${CMAKE_CURRENT_LIST_DIR}/;${CMAKE_CURRENT_LIST_DIR}/include/"
     )

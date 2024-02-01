@@ -89,7 +89,7 @@ endif()
 
 list(APPEND BUILDTYPES release debug)
 foreach(build IN LISTS BUILDTYPES )
-    file(GLOB SKIA_FILES "${CMAKE_SOURCE_DIR}/out/${build}/*skia.*")
+    file(GLOB SKIA_FILES "${CMAKE_SOURCE_DIR}/out/${build}/*skia*")
 
     file(COPY ${SKIA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/bin/${build}/" FILES_MATCHING PATTERN "*.dll" PATTERN "*.pdb")
     file(COPY ${SKIA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/${build}/" FILES_MATCHING PATTERN "*.lib" PATTERN "*.so")

@@ -1649,6 +1649,9 @@ skia_component("skia") {
   if (!skia_enable_ganesh && !skia_enable_graphite) {
     sources += skia_no_slug_srcs
   }
+  if (is_debug) {
+    output_name = target_name+"d"
+  }
 }
 
 # DebugCanvas used in experimental/wasm-skp-debugger
