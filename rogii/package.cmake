@@ -8,8 +8,6 @@ add_library(
     IMPORTED
 )
 
-add_definitions(-DSK_GL)
-
 if(MSVC)
     set_target_properties(
         skia::library
@@ -24,8 +22,10 @@ if(MSVC)
                 "${CMAKE_CURRENT_LIST_DIR}/lib/debug/skiad.dll.lib"
             INTERFACE_INCLUDE_DIRECTORIES
                 "${CMAKE_CURRENT_LIST_DIR}/;${CMAKE_CURRENT_LIST_DIR}/include/"
+            INTERFACE_COMPILE_DEFINITIONS
+                "SK_GL;SKIA_DLL;SK_GANESH;GR_TEST_UTILS=1"
     )
-    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set_target_properties(
         skia::library
         PROPERTIES
@@ -35,6 +35,8 @@ if(MSVC)
                 "${CMAKE_CURRENT_LIST_DIR}/lib/debug/libskiad.so"
             INTERFACE_INCLUDE_DIRECTORIES
                 "${CMAKE_CURRENT_LIST_DIR}/;${CMAKE_CURRENT_LIST_DIR}/include/"
+            INTERFACE_COMPILE_DEFINITIONS
+                "SK_GL;SKIA_DLL;SK_GANESH;GR_TEST_UTILS=1"
     )
 endif()
 
