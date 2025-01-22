@@ -24,7 +24,7 @@ FOR  %%D IN (release debug) DO (
     ECHO is_official_build=false
     ECHO is_component_build=true
     ECHO skia_use_fontconfig=false
-    ECHO skia_use_freetype=false
+    ECHO skia_use_freetype=true
     ECHO skia_enable_tools=false
     ECHO skia_use_system_libjpeg_turbo=false
     ECHO skia_use_system_libwebp=false
