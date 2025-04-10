@@ -4,6 +4,9 @@ export PATH="${PWD}/depot_tools:${PATH}"
 
 ln -s /bin/python3 /bin/python
 
+update-alternatives --install /bin/cc cc /usr/bin/gcc 100
+update-alternatives --install /bin/c++ c++ /usr/bin/g++ 100
+
 ./tools/install_dependencies.sh --yes
 ./bin/fetch-gn
 python3 ./tools/git-sync-deps
