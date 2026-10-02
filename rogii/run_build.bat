@@ -2,6 +2,8 @@ SETLOCAL EnableDelayedExpansion
 
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 set PATH=%CD%\depot_tools;%PATH%
+call depot_tools\bootstrap\win_tools.bat
+if errorlevel 1 exit /b 1
 
 
 set DEPOT_TOOLS_WIN_TOOLCHAIN=0
@@ -50,5 +52,7 @@ FOR  %%D IN (release debug) DO (
     )
 
     bin\gn gen out\%%D
-    ninja -C out\%%D skia
+    if errorlevel 1 exit /b 1
+    call ninja -C out\%%D skia
+    if errorlevel 1 exit /b 1
 )
