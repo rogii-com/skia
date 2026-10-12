@@ -84,7 +84,17 @@ if(WIN32)
     COMMAND
         .\\rogii\\run_build.bat
     WORKING_DIRECTORY
-    "${CMAKE_SOURCE_DIR}")
+    "${CMAKE_SOURCE_DIR}"
+    RESULT_VARIABLE
+        RUN_BUILD_RESULT)
+    if(NOT RUN_BUILD_RESULT EQUAL 0)
+        message(FATAL_ERROR "rogii/run_build.bat failed with exit code ${RUN_BUILD_RESULT}")
+    endif()
+    foreach(artifact release/skia.dll release/skia.dll.lib debug/skiad.dll debug/skiad.dll.lib)
+        if(NOT EXISTS "${CMAKE_SOURCE_DIR}/out/${artifact}")
+            message(FATAL_ERROR "out/${artifact} was not built")
+        endif()
+    endforeach()
 endif()
 
 list(APPEND BUILDTYPES release debug)
