@@ -42,6 +42,7 @@ else()
             OUTPUT_VARIABLE
                 TAG
             OUTPUT_STRIP_TRAILING_WHITESPACE
+            COMMAND_ERROR_IS_FATAL ANY
         )
         set(
             TAG
@@ -73,29 +74,41 @@ set(
 message("${CMAKE_CURRENT_LIST_DIR}")
 
 if(UNIX)
-execute_process(
-    COMMAND
-        bash rogii/run_build.sh
-    WORKING_DIRECTORY
-    "${CMAKE_SOURCE_DIR}")
+    execute_process(
+        COMMAND
+            bash rogii/run_build.sh
+        WORKING_DIRECTORY
+            "${CMAKE_SOURCE_DIR}"
+        COMMAND_ERROR_IS_FATAL ANY
+    )
+    set(
+        ARTIFACTS
+        release/libskia.so
+        debug/libskiad.so
+    )
 endif()
 if(WIN32)
-        execute_process(
-    COMMAND
-        .\\rogii\\run_build.bat
-    WORKING_DIRECTORY
-    "${CMAKE_SOURCE_DIR}"
-    RESULT_VARIABLE
-        RUN_BUILD_RESULT)
-    if(NOT RUN_BUILD_RESULT EQUAL 0)
-        message(FATAL_ERROR "rogii/run_build.bat failed with exit code ${RUN_BUILD_RESULT}")
-    endif()
-    foreach(artifact release/skia.dll release/skia.dll.lib debug/skiad.dll debug/skiad.dll.lib)
-        if(NOT EXISTS "${CMAKE_SOURCE_DIR}/out/${artifact}")
-            message(FATAL_ERROR "out/${artifact} was not built")
-        endif()
-    endforeach()
+    execute_process(
+        COMMAND
+            .\\rogii\\run_build.bat
+        WORKING_DIRECTORY
+            "${CMAKE_SOURCE_DIR}"
+        COMMAND_ERROR_IS_FATAL ANY
+    )
+    set(
+        ARTIFACTS
+        release/skia.dll
+        release/skia.dll.lib
+        debug/skiad.dll
+        debug/skiad.dll.lib
+    )
 endif()
+
+foreach(artifact IN LISTS ARTIFACTS)
+    if(NOT EXISTS "${CMAKE_SOURCE_DIR}/out/${artifact}")
+        message(FATAL_ERROR "out/${artifact} was not built")
+    endif()
+endforeach()
 
 list(APPEND BUILDTYPES release debug)
 foreach(build IN LISTS BUILDTYPES )
@@ -115,6 +128,7 @@ foreach(build IN LISTS BUILDTYPES )
                         bash ${CMAKE_CURRENT_LIST_DIR}/split_debug_info.sh "${file}"
                     WORKING_DIRECTORY
                         "${CMAKE_INSTALL_PREFIX}/lib/${build}/"
+                    COMMAND_ERROR_IS_FATAL ANY
                 )
             endif()
         endforeach()
