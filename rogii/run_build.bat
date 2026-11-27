@@ -1,6 +1,7 @@
 SETLOCAL EnableDelayedExpansion
 
-git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+if errorlevel 1 exit /b 1
 set PATH=%CD%\depot_tools;%PATH%
 call depot_tools\bootstrap\win_tools.bat
 if errorlevel 1 exit /b 1
@@ -9,14 +10,17 @@ if errorlevel 1 exit /b 1
 set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 
 set win_vc=!VCINSTALLDIR:\=\\!
-set win_toolchain_version=!VSCMD_ARG_VCVARS_VER!
+rem full toolset version (e.g. 14.51.36231): gn looks for VC\Tools\MSVC\<version>
+set win_toolchain_version=!VCToolsVersion!
 set win_sdk=!WindowsSdkDir:\=\\!
 set win_sdk_version=!VSCMD_ARG_winsdk!
 
 RMDIR /Q /S out
 
 python bin\fetch-gn
+if errorlevel 1 exit /b 1
 python tools\git-sync-deps
+if errorlevel 1 exit /b 1
 
 FOR  %%D IN (release debug) DO (
     ECHO Build %%D
